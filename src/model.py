@@ -3,7 +3,7 @@ from datetime import date
 from typing import List, Optional
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)  # https://github.com/cosmicpython/code/issues/17
 class OrderLine:
     orderid: str
     sku: str
