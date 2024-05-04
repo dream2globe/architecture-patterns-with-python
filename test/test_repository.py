@@ -54,14 +54,16 @@ def insert_allocation(session, orderline_id, batch_id):
     session.execute(sql)
 
 
-def test_repository_can_retrueve_a_batch_with_allocation(session):
+def test_repository_can_retrieve_a_batch_with_allocation(session):
     # Prepare data
     orderline_id = insert_order_line(session)
     batch1_id = insert_batch(session, "batch1")
     insert_batch(session, "batch2")
+
     # Run a test case
     insert_allocation(session, orderline_id, batch1_id)
     repo = SqlAlchemyRepository(session)
+
     # Check a result
     retrieved = repo.get("batch1")
     expected = Batch("batch1", "GENERIC-SOFA", 100, eta=None)
